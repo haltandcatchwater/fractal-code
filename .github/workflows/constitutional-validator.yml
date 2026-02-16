@@ -1,0 +1,57 @@
+name: Constitutional Validator
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Constitution
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install and build SDK
+        working-directory: sdk
+        run: npm install && npm run build
+
+      - name: Install and build Validator
+        working-directory: validator
+        run: npm install && npm run build
+
+      - name: Install and build hello-fractal example
+        working-directory: examples/hello-fractal
+        run: npm install && npm run build
+
+      - name: Run Constitutional Validator on examples
+        working-directory: validator
+        run: node dist/index.js ../examples/hello-fractal
+
+      - name: Post validation results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            let output;
+            try {
+              output = execSync('node validator/dist/index.js examples/hello-fractal', {
+                encoding: 'utf8',
+                cwd: '${{ github.workspace }}'
+              });
+            } catch (e) {
+              output = e.stdout || e.message;
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## Constitutional Validation Results\n\n\`\`\`\n${output}\n\`\`\``
+            });

@@ -1,0 +1,28 @@
+{
+  "name": "@fractal-code/validator",
+  "version": "0.1.0",
+  "description": "Constitutional Validator for Fractal Code — enforces the 10 inviolable principles",
+  "main": "dist/index.js",
+  "bin": {
+    "fractal-validate": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "validate": "node dist/index.js"
+  },
+  "keywords": [
+    "fractal-code",
+    "validator",
+    "constitutional"
+  ],
+  "author": "Angelo Regalbuto / Regal Health & Retirement LLC",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "glob": "^10.3.0"
+  }
+}
