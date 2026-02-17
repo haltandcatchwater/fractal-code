@@ -1,0 +1,29 @@
+# ── INTAKE CHANNEL ───────────────────────────────────────────────────────
+# Buffers raw log entries between the ingester and the validator.
+# FIFO ordering ensures logs are processed in the order they arrived.
+
+cell:
+  identity:
+    name: "intake"
+    version: "1.0.0"
+    type: "Channel"
+
+  contract:
+    carries: "RawLogEntry"
+    mode: "fifo"
+    buffer_size: 500
+    circuit_breaker:
+      complexity_budget: 50000
+      safe_mode_action: "drop_newest"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "data-pipeline-example-v1"
+    justification: "Buffers raw logs between ingester and validator per Composition Rule 2."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  connects:
+    from: "ingester"
+    to: "validator"
+
+  signature: "0x0000000000000000"

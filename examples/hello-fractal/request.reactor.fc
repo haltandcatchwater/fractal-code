@@ -1,0 +1,30 @@
+# ── REQUEST REACTOR ──────────────────────────────────────────────────────
+# Listens for greeting request events and acknowledges them.
+# Entry point for the hello-fractal demo pipeline.
+
+cell:
+  identity:
+    name: "request"
+    version: "1.0.0"
+    type: "Reactor"
+
+  contract:
+    listens_to: "GreetingRequest"
+    emits: "GreetingEvent"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "constitution-v1.0-step5"
+    justification: "Handles incoming greeting events as the entry point Reactor for the demo pipeline."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    on: |
+      console.log(`  [Reactor] Received greeting request for: ${event.name}`);
+      return { accepted: true, name: event.name };
+
+  signature: "0x0000000000000000"

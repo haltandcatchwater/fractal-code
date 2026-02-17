@@ -1,0 +1,57 @@
+# ── APP (Root Composed Cell) ─────────────────────────────────────────────
+# Root Transformer composing all four cell types into a greeting pipeline.
+# Flow: Request (Reactor) -> Pipe (Channel) -> Greeter (Transformer) -> Pipe -> Memory (Keeper)
+# From the outside, this looks identical to a simple Transformer (same contract).
+
+cell:
+  identity:
+    name: "app"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "string"
+    output: "string"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "constitution-v1.0-step5"
+    justification: "Root cell demonstrating fractal composition with all four cell types communicating through Channels."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  children:
+    - ref: "./request.reactor.fc"
+      as: "request"
+    - ref: "./pipe.channel.fc"
+      as: "pipe"
+    - ref: "./greeter.transformer.fc"
+      as: "greeter"
+    - ref: "./memory.keeper.fc"
+      as: "memory"
+
+  channels:
+    - name: "pipe"
+      topology:
+        - from: "request"
+          to: "greeter"
+        - from: "greeter"
+          to: "memory"
+
+  logic:
+    lang: "typescript"
+    process: |
+      const event = await request.on({ name: input, timestamp: new Date().toISOString() });
+      await pipe.send({ from: "request", to: "greeter", data: event.name });
+      const msg = await pipe.receive();
+      const greeting = await greeter.process(msg.data);
+      await pipe.send({ from: "greeter", to: "memory", data: greeting });
+      const result = await pipe.receive();
+      const history = await memory.get();
+      history.greetings.push({ name: input, message: result.data, timestamp: new Date().toISOString() });
+      await memory.set(history);
+      return greeting;
+
+  signature: "0x0000000000000000"

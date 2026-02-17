@@ -1,0 +1,29 @@
+# ── GREETER TRANSFORMER ──────────────────────────────────────────────────
+# The same cell as greeter.transformer.ts, expressed in native .fc syntax.
+# Proves the bridge: same contract, same behavior, different format.
+
+cell:
+  identity:
+    name: "greeter"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "string"
+    output: "string"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "constitution-v1.0-step5"
+    justification: "Provides stateless greeting transformation for the hello-fractal demo pipeline."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      return `Hello, ${input}! Welcome to Fractal Code.`;
+
+  signature: "0x0000000000000000"

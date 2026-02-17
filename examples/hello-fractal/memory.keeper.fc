@@ -1,0 +1,33 @@
+# ── MEMORY KEEPER ────────────────────────────────────────────────────────
+# Stores the history of all greetings produced.
+# Demonstrates the Keeper cell pattern for state persistence.
+
+cell:
+  identity:
+    name: "memory"
+    version: "1.0.0"
+    type: "Keeper"
+
+  contract:
+    state_schema: "GreetingHistory"
+    operations:
+      - "get"
+      - "set"
+    circuit_breaker:
+      complexity_budget: 2000
+      safe_mode_action: "read_only"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "constitution-v1.0-step5"
+    justification: "Maintains greeting history state to demonstrate the Keeper cell pattern."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    get: |
+      return state;
+    set: |
+      state = value;
+
+  signature: "0x0000000000000000"

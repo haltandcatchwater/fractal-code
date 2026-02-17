@@ -1,0 +1,80 @@
+# ── DATA PIPELINE (Root Composed Cell) ───────────────────────────────────
+# Log processing pipeline composing all four cell types:
+#   Ingester (Reactor) -> Intake (Channel) -> Validator (Transformer)
+#   -> Pipeline (Channel) -> Enricher (Transformer) -> Output (Channel) -> Store (Keeper)
+#
+# Demonstrates mixed .ts/.fc interoperability — some children are defined as
+# .fc files, others as .ts files. From the outside, this is just a Transformer.
+
+cell:
+  identity:
+    name: "data-pipeline"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "array"
+    output: "string"
+    circuit_breaker:
+      complexity_budget: 1000
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "data-pipeline-example-v1"
+    justification: "Root composed cell orchestrating the full log processing pipeline with all four cell types."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  children:
+    - ref: "./ingester.reactor.fc"
+      as: "ingester"
+    - ref: "./intake.channel.fc"
+      as: "intake"
+    - ref: "./src/validator.transformer.ts"
+      as: "validator"
+    - ref: "./src/pipeline.channel.ts"
+      as: "pipeline"
+    - ref: "./src/enricher.transformer.ts"
+      as: "enricher"
+    - ref: "./src/output.channel.ts"
+      as: "output"
+    - ref: "./store.keeper.fc"
+      as: "store"
+
+  channels:
+    - name: "intake"
+      topology:
+        - from: "ingester"
+          to: "validator"
+    - name: "pipeline"
+      topology:
+        - from: "validator"
+          to: "enricher"
+    - name: "output"
+      topology:
+        - from: "enricher"
+          to: "store"
+
+  logic:
+    lang: "typescript"
+    process: |
+      // Orchestration logic — processes each log entry through the full pipeline.
+      // See src/app.ts for the executable TypeScript implementation.
+      for (const entry of input) {
+        const ingested = await ingester.on(entry);
+        await intake.send({ from: "ingester", to: "validator", data: ingested });
+        const msg = await intake.receive();
+        const validated = await validator.process(msg.data);
+        if (!validated.valid) continue;
+        await pipeline.send({ from: "validator", to: "enricher", data: validated });
+        const enrichMsg = await pipeline.receive();
+        const enriched = await enricher.process(enrichMsg.data);
+        await output.send({ from: "enricher", to: "store", data: enriched });
+        const storeMsg = await output.receive();
+        const state = await store.get();
+        state.logs.push(storeMsg.data);
+        await store.set(state);
+      }
+      return `Processed ${input.length} entries`;
+
+  signature: "0x0000000000000000"

@@ -1,0 +1,29 @@
+# ── PIPE CHANNEL ─────────────────────────────────────────────────────────
+# Mediates all sibling communication in the greeting pipeline.
+# Required by Composition Rule 2: no direct references between siblings.
+
+cell:
+  identity:
+    name: "pipe"
+    version: "1.0.0"
+    type: "Channel"
+
+  contract:
+    carries: "object"
+    mode: "fifo"
+    buffer_size: 50
+    circuit_breaker:
+      complexity_budget: 5000
+      safe_mode_action: "drop_newest"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "constitution-v1.0-step5"
+    justification: "Mediates all sibling communication as required by Composition Rule 2."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  connects:
+    from: "request"
+    to: "memory"
+
+  signature: "0x0000000000000000"

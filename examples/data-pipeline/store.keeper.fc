@@ -1,0 +1,33 @@
+# ── STORE KEEPER ─────────────────────────────────────────────────────────
+# Persists enriched log entries and maintains pipeline statistics.
+# The final destination of all processed data in the pipeline.
+
+cell:
+  identity:
+    name: "store"
+    version: "1.0.0"
+    type: "Keeper"
+
+  contract:
+    state_schema: "PipelineStats"
+    operations:
+      - "get"
+      - "set"
+    circuit_breaker:
+      complexity_budget: 20000
+      safe_mode_action: "read_only"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "data-pipeline-example-v1"
+    justification: "Persists processed logs and maintains aggregate pipeline statistics."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    get: |
+      return state;
+    set: |
+      state = value;
+
+  signature: "0x0000000000000000"

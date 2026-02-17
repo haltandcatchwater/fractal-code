@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "accepted": { "type": "boolean", "description": "Whether the greeting request was accepted" },
+    "name": { "type": "string", "description": "The name that was accepted for greeting" }
+  },
+  "required": ["accepted", "name"]
+}

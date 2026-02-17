@@ -1,0 +1,6 @@
+{
+  "name": "data-pipeline",
+  "version": "1.0.0",
+  "root": "app.transformer.fc",
+  "constitution": "1.1"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Unique log ID assigned during validation" },
+    "timestamp": { "type": "string", "description": "Validated ISO 8601 timestamp" },
+    "level": { "type": "string", "description": "Normalized log level" },
+    "source": { "type": "string", "description": "Validated source identifier" },
+    "message": { "type": "string", "description": "Sanitized log message" },
+    "valid": { "type": "boolean", "description": "Whether the entry passed all validation checks" },
+    "errors": { "type": "array", "items": { "type": "string" }, "description": "Validation error messages, if any" }
+  },
+  "required": ["id", "timestamp", "level", "source", "message", "valid"]
+}

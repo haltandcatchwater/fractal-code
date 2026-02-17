@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "total_ingested": { "type": "integer", "description": "Total raw entries received" },
+    "total_valid": { "type": "integer", "description": "Entries that passed validation" },
+    "total_invalid": { "type": "integer", "description": "Entries that failed validation" },
+    "total_enriched": { "type": "integer", "description": "Entries successfully enriched" },
+    "total_stored": { "type": "integer", "description": "Entries persisted to storage" },
+    "by_level": {
+      "type": "object",
+      "description": "Count of stored entries grouped by log level"
+    },
+    "by_category": {
+      "type": "object",
+      "description": "Count of stored entries grouped by auto-category"
+    }
+  },
+  "required": ["total_ingested", "total_valid", "total_invalid", "total_enriched", "total_stored"]
+}

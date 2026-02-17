@@ -1,0 +1,32 @@
+# ── INGESTER REACTOR ─────────────────────────────────────────────────────
+# Listens for incoming raw log entries and validates basic structure.
+# Entry point of the data pipeline — all logs flow in through this reactor.
+
+cell:
+  identity:
+    name: "ingester"
+    version: "1.0.0"
+    type: "Reactor"
+
+  contract:
+    listens_to: "RawLogEntry"
+    emits: "RawLogEntry"
+    circuit_breaker:
+      complexity_budget: 10000
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "data-pipeline-example-v1"
+    justification: "Entry point reactor that ingests raw log events into the pipeline."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    on: |
+      if (!event.timestamp || !event.level || !event.source || !event.message) {
+        throw new Error(`Malformed log entry: missing required fields`);
+      }
+      return event;
+
+  signature: "0x0000000000000000"

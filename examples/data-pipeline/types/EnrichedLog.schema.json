@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Unique log ID" },
+    "timestamp": { "type": "string", "description": "Original timestamp" },
+    "level": { "type": "string", "description": "Log level" },
+    "source": { "type": "string", "description": "Source identifier" },
+    "message": { "type": "string", "description": "Log message" },
+    "enrichments": {
+      "type": "object",
+      "properties": {
+        "severity_score": { "type": "number", "description": "Numeric severity (0-100)" },
+        "category": { "type": "string", "description": "Auto-classified category" },
+        "processed_at": { "type": "string", "description": "When enrichment occurred" },
+        "word_count": { "type": "integer", "description": "Words in the message" }
+      },
+      "description": "Enrichment metadata added by the pipeline"
+    }
+  },
+  "required": ["id", "timestamp", "level", "source", "message", "enrichments"]
+}
