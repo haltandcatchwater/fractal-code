@@ -30,7 +30,7 @@ export function circuitBreakerCheck(cells: DiscoveredCell[]): CheckResult {
 
       // Budget must be a non-negative number
       if (cell.healthReport && cell.healthReport.budgetRemaining !== undefined) {
-        if (typeof cell.healthReport.budgetRemaining !== "number" || cell.healthReport.budgetRemaining < 0) {
+        if (typeof cell.healthReport.budgetRemaining !== "number" || !Number.isFinite(cell.healthReport.budgetRemaining) || cell.healthReport.budgetRemaining < 0) {
           violations.push({
             ...ctx,
             message: `budgetRemaining must be a non-negative number, got: ${cell.healthReport.budgetRemaining}`,
