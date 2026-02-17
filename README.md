@@ -50,7 +50,7 @@ Every cell — whether it's a single function or a system of ten thousand compon
 
 ```bash
 # Clone the repository
-git clone [https://github.com/haltandcatchwater/fractal-code.git](https://github.com/haltandcatchwater/fractal-code.git)
+git clone https://github.com/haltandcatchwater/fractal-code.git
 cd fractal-code
 
 # Install the SDK
@@ -64,7 +64,11 @@ cd examples/hello-fractal && npm install && npm run start
 
 # Validate the example against the constitution
 cd ../.. && npx fractal-validate examples/hello-fractal
-Repository Structure
+```
+
+## Repository Structure
+
+```
 fractal-code/
 ├── CONSTITUTION.md          # The governing document — the law of Fractal Code
 ├── CONTRIBUTING.md          # How to contribute (written for AI agents)
@@ -76,51 +80,54 @@ fractal-code/
 ├── validator/               # Constitutional Validator (TypeScript)
 ├── sdk/                     # Fractal Code SDK — base classes for all cell types
 └── examples/hello-fractal/  # Minimal reference application
-For AI Agents
+```
+
+## For AI Agents
+
 This project is built by AI agents. If you are an AI coding agent:
 
-Read CONSTITUTION.md — this is the law
+1. Read [CONSTITUTION.md](./CONSTITUTION.md) — this is the law
+2. Read [CONTRIBUTING.md](./CONTRIBUTING.md) — this is how you contribute
+3. Use the [SDK](./sdk/) to build cells
+4. Run the [validator](./validator/) before submitting
+5. Branch naming: `agent/<platform>/<feature-description>`
 
-Read CONTRIBUTING.md — this is how you contribute
+Agents from **any platform** are welcome: Claude, GPT, Gemini, LLaMA, Mistral, or any other.
 
-Use the SDK to build cells
+## For Humans
 
-Run the validator before submitting
+You govern. Read the [Constitution](./CONSTITUTION.md). Your role is to:
 
-Branch naming: agent/<platform>/<feature-description>
+- Ratify or reject constitutional amendments
+- Review and merge contributions
+- Set strategic direction
+- Maintain the integrity of the architectural vision
 
-Agents from any platform are welcome: Claude, GPT, Gemini, LLaMA, Mistral, or any other.
+## Branch Protection (Repository Owner)
 
-For Humans
-You govern. Read the Constitution. Your role is to:
-
-Ratify or reject constitutional amendments
-
-Review and merge contributions
-
-Set strategic direction
-
-Maintain the integrity of the architectural vision
-
-Branch Protection (Repository Owner)
 Enable these settings on your GitHub repository:
 
-Require pull request reviews before merging
+- Require pull request reviews before merging
+- Require status checks to pass (the constitutional validator)
+- Require branches to be up to date before merging
+- Restrict who can push to `main` (only founder/admins)
 
-Require status checks to pass (the constitutional validator)
+## Licensing
 
-Require branches to be up to date before merging
+Fractal Code is available under a **Dual License** model:
 
-Restrict who can push to main (only founder/admins)
+- **Open Source (GPLv3):** For open source projects, you are free to use this software under the terms of the GNU General Public License v3.0 (GPLv3). This requires that any software you build and distribute using Fractal Code must also be open sourced under the GPLv3.
 
-Licensing
-Fractal Code is available under a Dual License model:
+- **Commercial License:** For proprietary or closed-source software where you do not wish to share your source code, you must purchase a Commercial License.
 
-Open Source (GPLv3): For open source projects, you are free to use this software under the terms of the GNU General Public License v3.0 (GPLv3). This requires that any software you build and distribute using Fractal Code must also be open sourced under the GPLv3.
+Contact the founder for commercial licensing inquiries. See [LICENSE](./LICENSE) for the full legal text.
 
-Commercial License: For proprietary or closed-source software where you do not wish to share your source code, you must purchase a Commercial License.
+## Founder
 
-Contact the founder for commercial licensing inquiries. See LICENSE for the full legal text.
+**Angelo Regalbuto**
+Regal Health & Retirement LLC
+February 2026
 
-Founder
-Angelo Regalbuto
+---
+
+*The seed is planted. The architecture enforces itself. Now the agents build.*
