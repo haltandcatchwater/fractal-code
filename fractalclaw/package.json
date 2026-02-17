@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "FractalClaw — Constitutional Skill Security PoC proving Fractal Code catches every documented OpenClaw attack vector",
   "main": "dist/demo.js",
+  "bin": {
+    "fractalclaw": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsc",
     "demo": "node dist/demo.js",
@@ -19,6 +22,7 @@
   "dependencies": {
     "@fractal-code/sdk": "file:../sdk",
     "@fractal-code/parser": "file:../parser",
+    "commander": "^13.1.0",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
