@@ -1,5 +1,7 @@
 # FractalClaw — Constitutional Skill Security PoC
 
+![FractalClaw Demo](docs/demo-output.png)
+
 OpenClaw (145K+ GitHub stars) has documented security problems: malicious skills exfiltrate data, inject prompts, and escalate privileges. The root cause is zero structural governance — skills are text files loaded with full trust.
 
 **FractalClaw proves Fractal Code solves this** by rebuilding OpenClaw's skill system on constitutional architecture, catching every documented attack vector.
