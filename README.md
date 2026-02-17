@@ -74,7 +74,7 @@ cd ../.. && npx fractal-validate examples/hello-fractal
 cd fractalclaw && npm install && npm run build && npm run demo
 ```
 
-3 legitimate skills pass. 6 malicious skills are rejected — each caught by a specific constitutional principle (Channel Isolation, Universal Contract, Structural Signature, Circuit Breaker). See the [FractalClaw README](./fractalclaw/README.md) for full details.
+3 legitimate skills pass. 6 malicious skills and 8 obfuscation bypass attempts are rejected — each caught by a specific constitutional principle (Channel Isolation, Universal Contract, Structural Signature, Circuit Breaker). The scanner detects 19 patterns including base64 encoding, hex/unicode escapes, dynamic imports, and template literal injection. See the [FractalClaw README](./fractalclaw/README.md) for full details.
 
 ## Repository Structure
 

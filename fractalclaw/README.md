@@ -149,6 +149,8 @@ When checks fail, suggests fixes:
 
 ## Attack Vectors Caught
 
+### Direct Attacks
+
 | Attack | How It Works | Caught By | Principle |
 |--------|-------------|-----------|-----------|
 | **Data Exfiltration** | `fs.readFileSync` + `fetch()` to external URL | Static scanner | III — Channel Isolation |
@@ -157,6 +159,21 @@ When checks fail, suggests fixes:
 | **Supply Chain** | Clean logic but forged signature | Signature verification | X — Structural Signature |
 | **Stealth Network** | `WebSocket` + `XMLHttpRequest` covert channels | Static scanner | III — Channel Isolation |
 | **Budget Bomb** | `complexity_budget: 999999999999` | Budget sanity check | Circuit Breaker |
+
+### Obfuscation Bypasses
+
+Attackers can try to hide banned keywords behind encoding tricks. The scanner detects these too:
+
+| Attack | How It Works | Caught By | Principle |
+|--------|-------------|-----------|-----------|
+| **Base64 Decode** | `atob('ZmV0Y2g=')` hides `fetch` | Static scanner | III — Channel Isolation |
+| **Base64 Encode** | `btoa(secrets)` encodes data for exfiltration | Static scanner | III — Channel Isolation |
+| **Buffer Base64** | `Buffer.from(encoded, 'base64')` Node-specific decode | Static scanner | III — Channel Isolation |
+| **Function Template** | `` Function(`return ...`) `` code injection via template literal | Static scanner | III — Channel Isolation |
+| **Dynamic Require** | `require(variable)` loads arbitrary modules | Static scanner | III — Channel Isolation |
+| **Dynamic Import** | `import('./secret-module')` loads modules at runtime | Static scanner | III — Channel Isolation |
+| **Hex Escape** | `\x66\x65\x74\x63\x68` spells `fetch` char by char | Static scanner | III — Channel Isolation |
+| **Unicode Escape** | `\u0066\u0065\u0074\u0063\u0068` spells `fetch` char by char | Static scanner | III — Channel Isolation |
 
 ## What It Doesn't Do
 
@@ -176,6 +193,15 @@ The SDK signature is computed from the **contract** (name, type, schemas, lineag
 - **Circuit breakers** enforce runtime resource limits (budget bombs)
 
 Three layers, zero gaps.
+
+## Running the Tests
+
+```bash
+cd fractalclaw
+npm install && npm test
+```
+
+27 tests across three suites: regression tests for all 11 original patterns, tests for all 8 obfuscation patterns, and false-positive checks for clean code.
 
 ## Running the Demo
 
@@ -197,12 +223,15 @@ fractalclaw/
 │   │   └── verify.ts         # verify command — deep single-file checks
 │   ├── signer.ts             # Structural signature computation
 │   ├── skill-loader.ts       # Constitutional skill loading pipeline
-│   ├── skill-scanner.ts      # Static analysis of logic bodies
+│   ├── skill-scanner.ts      # Static analysis of logic bodies (19 patterns)
 │   ├── skill-executor.ts     # Circuit breaker runtime enforcement demo
-│   └── demo.ts               # Demo entry point
+│   ├── demo.ts               # Demo entry point
+│   └── __tests__/
+│       └── scanner.test.ts   # Vitest suite — 27 tests (regression + obfuscation + clean code)
 ├── demos/
 │   ├── legitimate/           # 3 clean skills that pass all checks
-│   └── malicious/            # 6 attack skills, each caught by a different principle
+│   ├── malicious/            # 6 attack skills, each caught by a different principle
+│   └── obfuscated/           # 8 obfuscation bypass attempts, all caught
 ├── types/                    # JSON Schema definitions for skill contracts
 ├── spec/
 │   └── skill-manifest.md     # How OpenClaw skills map to Fractal Cells
