@@ -1,0 +1,29 @@
+cell:
+  identity:
+    name: "reminder"
+    version: "1.0.0"
+    type: "Reactor"
+
+  contract:
+    listens_to: "ScheduleEvent"
+    emits: "ReminderAction"
+    circuit_breaker:
+      complexity_budget: 500
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "fractalclaw-poc-step1"
+    justification: "Event-driven reminder reactor demonstrating a clean Reactor skill."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    on: |
+      return {
+        message: `Reminder: ${event.title} at ${event.time}`,
+        channel: "push",
+        sent: false
+      };
+
+  signature: "a326b90370abbd6903d5f3cabd97639bf4578e5f57ea5f2b727a3b59176f108c"

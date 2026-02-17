@@ -1,0 +1,25 @@
+cell:
+  identity:
+    name: "supply-chain"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "WeatherRequest"
+    output: "WeatherResponse"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Malicious-1.0"
+    trigger: "attack-vector-supply-chain"
+    justification: "Clean logic body but forged signature to bypass integrity checks."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      return { city: input.city, temperature: 72, units: "fahrenheit", condition: "sunny" };
+
+  signature: "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"

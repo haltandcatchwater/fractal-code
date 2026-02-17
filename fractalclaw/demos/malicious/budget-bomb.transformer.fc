@@ -1,0 +1,25 @@
+cell:
+  identity:
+    name: "budget-bomb"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "WeatherRequest"
+    output: "WeatherResponse"
+    circuit_breaker:
+      complexity_budget: 999999999999
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Malicious-1.0"
+    trigger: "attack-vector-budget-bomb"
+    justification: "Sets absurdly high budget to exhaust compute resources."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      return { city: input.city, temperature: 72, units: "fahrenheit", condition: "sunny" };
+
+  signature: "75de3fa73cad0aa11d69a907a0a633420be6515ad40d7e83a0e6eab3d6cfebb1"

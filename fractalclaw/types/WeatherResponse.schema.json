@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "city": { "type": "string" },
+    "temperature": { "type": "number" },
+    "units": { "type": "string" },
+    "condition": { "type": "string" }
+  },
+  "required": ["city", "temperature", "units", "condition"]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "time": { "type": "string", "format": "date-time" },
+    "recurring": { "type": "boolean" }
+  },
+  "required": ["title", "time"]
+}

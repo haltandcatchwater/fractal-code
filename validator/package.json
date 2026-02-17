@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Constitutional Validator for Fractal Code — enforces the 11 inviolable principles",
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./lib": "./dist/lib.js"
+  },
   "bin": {
     "fractal-validate": "./dist/index.js"
   },

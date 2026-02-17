@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "city": { "type": "string" },
+    "units": { "type": "string", "enum": ["celsius", "fahrenheit"] }
+  },
+  "required": ["city"]
+}

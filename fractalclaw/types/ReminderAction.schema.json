@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "message": { "type": "string" },
+    "channel": { "type": "string", "enum": ["push", "email", "sms"] },
+    "sent": { "type": "boolean" }
+  },
+  "required": ["message", "channel"]
+}

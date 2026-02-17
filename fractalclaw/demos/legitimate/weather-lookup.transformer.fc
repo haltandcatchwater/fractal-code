@@ -1,0 +1,31 @@
+cell:
+  identity:
+    name: "weather-lookup"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "WeatherRequest"
+    output: "WeatherResponse"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "fractalclaw-poc-step1"
+    justification: "Stateless weather lookup demonstrating a clean Transformer skill."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      const response = {
+        city: input.city,
+        temperature: 72,
+        units: input.units || "fahrenheit",
+        condition: "sunny"
+      };
+      return response;
+
+  signature: "d32c68e15aef69e399e4f29699df708e8248ffa92f835c008a41d05509a634de"

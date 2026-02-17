@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "array",
+      "items": { "$ref": "NoteEntry.schema.json" }
+    },
+    "count": { "type": "integer" }
+  },
+  "required": ["notes"]
+}

@@ -1,0 +1,29 @@
+cell:
+  identity:
+    name: "notes"
+    version: "1.0.0"
+    type: "Keeper"
+
+  contract:
+    state_schema: "NoteStore"
+    operations:
+      - "get"
+      - "set"
+    circuit_breaker:
+      complexity_budget: 2000
+      safe_mode_action: "read_only"
+
+  lineage:
+    source: "Agent-Claude-Opus-4.6"
+    trigger: "fractalclaw-poc-step1"
+    justification: "Persistent note storage demonstrating a clean Keeper skill."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    get: |
+      return state;
+    set: |
+      state = value;
+
+  signature: "73b067fd7d3f8b19383fbad90dd304137c0f4a77c822d6651f0cb80bac9d7dd6"
