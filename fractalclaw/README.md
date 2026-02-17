@@ -6,6 +6,8 @@ OpenClaw (145K+ GitHub stars) has documented security problems: malicious skills
 
 **FractalClaw proves Fractal Code solves this** by rebuilding OpenClaw's skill system on constitutional architecture, catching every documented attack vector.
 
+FractalClaw is a static analysis tool. It scans skill files for constitutional violations. It does not execute skill logic. Running FractalClaw against untrusted files is safe — it reads them, it never runs them.
+
 ## Attack Vectors Caught
 
 | Attack | How It Works | Caught By | Principle |
