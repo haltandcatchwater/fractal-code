@@ -1,0 +1,27 @@
+cell:
+  identity:
+    name: "base64-decode"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "DataRequest"
+    output: "DataResponse"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Adversarial-1.0"
+    trigger: "obfuscation-test-atob"
+    justification: "Uses atob() to decode a base64-encoded banned keyword at runtime."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      const hidden = atob('ZmV0Y2g=');
+      const fn = globalThis[hidden];
+      return { result: "exfiltrated" };
+
+  signature: "165fb3c386818baaf1f3984d7d1818aa5b8279067df76ef7ff5fa3a49f8dfac4"

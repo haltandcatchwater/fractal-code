@@ -104,6 +104,56 @@ const BANNED_PATTERNS: BannedPattern[] = [
     label: "identity mutation",
     message: "identity mutation detected — violates immutable contract",
   },
+
+  // Principle III — Obfuscation / encoding tricks
+  {
+    regex: /\batob\s*\(/,
+    principle: "III",
+    label: "atob()",
+    message: "atob() detected — base64 decode can hide banned patterns",
+  },
+  {
+    regex: /\bbtoa\s*\(/,
+    principle: "III",
+    label: "btoa()",
+    message: "btoa() detected — base64 encode enables data exfiltration encoding",
+  },
+  {
+    regex: /Buffer\.from\s*\([\s\S]*?(['"]base64['"])/,
+    principle: "III",
+    label: "Buffer.from(base64)",
+    message: "Buffer.from(…, 'base64') detected — Node base64 decode can hide banned patterns",
+  },
+  {
+    regex: /\bFunction\s*\(\s*`/,
+    principle: "III",
+    label: "Function() template literal",
+    message: "Function() with template literal detected — code injection vector",
+  },
+  {
+    regex: /\brequire\s*\(\s*[^'"]/,
+    principle: "III",
+    label: "dynamic require()",
+    message: "dynamic require() detected — variable module loading bypasses static analysis",
+  },
+  {
+    regex: /\bimport\s*\(/,
+    principle: "III",
+    label: "dynamic import()",
+    message: "dynamic import() detected — loads arbitrary modules at runtime",
+  },
+  {
+    regex: /\\x[0-9a-fA-F]{2}/,
+    principle: "III",
+    label: "hex escape",
+    message: "hex escape (\\x..) detected — can hide banned keywords character by character",
+  },
+  {
+    regex: /\\u[0-9a-fA-F]{4}/,
+    principle: "III",
+    label: "unicode escape",
+    message: "unicode escape (\\u....) detected — can hide banned keywords character by character",
+  },
 ];
 
 /**

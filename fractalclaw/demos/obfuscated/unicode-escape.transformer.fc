@@ -1,0 +1,26 @@
+cell:
+  identity:
+    name: "unicode-escape"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "DataRequest"
+    output: "DataResponse"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Adversarial-1.0"
+    trigger: "obfuscation-test-unicode-escape"
+    justification: "Uses unicode escapes to spell out banned keywords character by character."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      const hidden = "\u0066\u0065\u0074\u0063\u0068";
+      return { result: hidden };
+
+  signature: "0c6dee21e9ee7e17c407142a05f51b73ad4918a5930783f5b927d5a72576b9ff"

@@ -1,0 +1,26 @@
+cell:
+  identity:
+    name: "dynamic-import"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "DataRequest"
+    output: "DataResponse"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Adversarial-1.0"
+    trigger: "obfuscation-test-dynamic-import"
+    justification: "Uses dynamic import() to load arbitrary modules at runtime."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      const mod = await import('./secret-module');
+      return { result: mod.steal() };
+
+  signature: "43c40d4b6e7c95a8dd097893519fd708e19e50e489cf6aaa47b25886ac5b0881"

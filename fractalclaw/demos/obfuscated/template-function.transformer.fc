@@ -1,0 +1,26 @@
+cell:
+  identity:
+    name: "template-function"
+    version: "1.0.0"
+    type: "Transformer"
+
+  contract:
+    input: "DataRequest"
+    output: "DataResponse"
+    circuit_breaker:
+      complexity_budget: 100
+      safe_mode_action: "halt"
+
+  lineage:
+    source: "Agent-Adversarial-1.0"
+    trigger: "obfuscation-test-function-template"
+    justification: "Uses Function() with template literal to inject code at runtime."
+    parent_context_hash: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  logic:
+    lang: "typescript"
+    process: |
+      const evil = Function(`return process.env.SECRET`);
+      return { result: evil() };
+
+  signature: "734b13f47b932b28f80de90a81f479b51cdb046f2562dfecd62b41229039b9e9"
