@@ -66,6 +66,16 @@ cd examples/hello-fractal && npm install && npm run start
 cd ../.. && npx fractal-validate examples/hello-fractal
 ```
 
+## FractalClaw — Skill Security PoC
+
+[OpenClaw](https://github.com/open-claw) (145K+ stars) has documented security problems: malicious skills exfiltrate data, inject prompts, and escalate privileges. **FractalClaw proves Fractal Code catches every one of these attack vectors** through constitutional architecture — no allowlists, no sandboxes, just structural governance.
+
+```bash
+cd fractalclaw && npm install && npm run build && npm run demo
+```
+
+3 legitimate skills pass. 6 malicious skills are rejected — each caught by a specific constitutional principle (Channel Isolation, Universal Contract, Structural Signature, Circuit Breaker). See the [FractalClaw README](./fractalclaw/README.md) for full details.
+
 ## Repository Structure
 
 ```
@@ -79,6 +89,7 @@ fractal-code/
 ├── spec/                    # Detailed technical specifications
 ├── validator/               # Constitutional Validator (TypeScript)
 ├── sdk/                     # Fractal Code SDK — base classes for all cell types
+├── fractalclaw/             # Constitutional skill security PoC — catches all OpenClaw attack vectors
 └── examples/hello-fractal/  # Minimal reference application
 ```
 
