@@ -16,8 +16,8 @@
     "validator",
     "constitutional"
   ],
-  "author": "Angelo Regalbuto / Regal Health & Retirement LLC",
-  "license": "MIT",
+  "author": "Angelo Regalbuto,
+  "license": "GPL-3.0",
   "devDependencies": {
     "@types/node": "^25.2.3",
     "typescript": "^5.3.0"

@@ -50,7 +50,7 @@ Every cell — whether it's a single function or a system of ten thousand compon
 
 ```bash
 # Clone the repository
-git clone https://github.com/haltandcatchwater/fractal-code.git
+git clone [https://github.com/haltandcatchwater/fractal-code.git](https://github.com/haltandcatchwater/fractal-code.git)
 cd fractal-code
 
 # Install the SDK
@@ -64,64 +64,63 @@ cd examples/hello-fractal && npm install && npm run start
 
 # Validate the example against the constitution
 cd ../.. && npx fractal-validate examples/hello-fractal
-```
-
-## Repository Structure
-
-```
+Repository Structure
 fractal-code/
 ├── CONSTITUTION.md          # The governing document — the law of Fractal Code
 ├── CONTRIBUTING.md          # How to contribute (written for AI agents)
 ├── README.md                # You are here
-├── LICENSE                  # MIT License
+├── LICENSE                  # Dual License (GPLv3 / Commercial)
 ├── CLAUDE.md                # Instructions for Claude Code sessions
 ├── .github/workflows/       # CI pipeline — constitutional validation on every PR
 ├── spec/                    # Detailed technical specifications
 ├── validator/               # Constitutional Validator (TypeScript)
 ├── sdk/                     # Fractal Code SDK — base classes for all cell types
 └── examples/hello-fractal/  # Minimal reference application
-```
-
-## For AI Agents
-
+For AI Agents
 This project is built by AI agents. If you are an AI coding agent:
 
-1. Read [CONSTITUTION.md](./CONSTITUTION.md) — this is the law
-2. Read [CONTRIBUTING.md](./CONTRIBUTING.md) — this is how you contribute
-3. Use the [SDK](./sdk/) to build cells
-4. Run the [validator](./validator/) before submitting
-5. Branch naming: `agent/<platform>/<feature-description>`
+Read CONSTITUTION.md — this is the law
 
-Agents from **any platform** are welcome: Claude, GPT, Gemini, LLaMA, Mistral, or any other.
+Read CONTRIBUTING.md — this is how you contribute
 
-## For Humans
+Use the SDK to build cells
 
-You govern. Read the [Constitution](./CONSTITUTION.md). Your role is to:
+Run the validator before submitting
 
-- Ratify or reject constitutional amendments
-- Review and merge contributions
-- Set strategic direction
-- Maintain the integrity of the architectural vision
+Branch naming: agent/<platform>/<feature-description>
 
-## Branch Protection (Repository Owner)
+Agents from any platform are welcome: Claude, GPT, Gemini, LLaMA, Mistral, or any other.
 
+For Humans
+You govern. Read the Constitution. Your role is to:
+
+Ratify or reject constitutional amendments
+
+Review and merge contributions
+
+Set strategic direction
+
+Maintain the integrity of the architectural vision
+
+Branch Protection (Repository Owner)
 Enable these settings on your GitHub repository:
 
-- Require pull request reviews before merging
-- Require status checks to pass (the constitutional validator)
-- Require branches to be up to date before merging
-- Restrict who can push to `main` (only founder/admins)
+Require pull request reviews before merging
 
-## License
+Require status checks to pass (the constitutional validator)
 
-MIT — see [LICENSE](./LICENSE)
+Require branches to be up to date before merging
 
-## Founder
+Restrict who can push to main (only founder/admins)
 
-**Angelo Regalbuto**
-Regal Health & Retirement LLC
-February 2026
+Licensing
+Fractal Code is available under a Dual License model:
 
----
+Open Source (GPLv3): For open source projects, you are free to use this software under the terms of the GNU General Public License v3.0 (GPLv3). This requires that any software you build and distribute using Fractal Code must also be open sourced under the GPLv3.
 
-*The seed is planted. The architecture enforces itself. Now the agents build.*
+Commercial License: For proprietary or closed-source software where you do not wish to share your source code, you must purchase a Commercial License.
+
+Contact the founder for commercial licensing inquiries. See LICENSE for the full legal text.
+
+Founder
+Angelo Regalbuto
